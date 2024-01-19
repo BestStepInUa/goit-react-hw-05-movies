@@ -1,6 +1,6 @@
 const { Link } = require('react-router-dom');
 
-const TrendingMoviesList = ({ movies }) => {
+const MoviesList = ({ movies }) => {
   return (
     <ul>
       {movies.map(({ id, title }) => {
@@ -14,4 +14,4 @@ const TrendingMoviesList = ({ movies }) => {
   );
 };
 
-export default TrendingMoviesList;
+export default MoviesList;
