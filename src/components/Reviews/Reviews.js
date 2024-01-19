@@ -1,56 +1,55 @@
+import { fetchMovieReviews } from 'helpers/API/API';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { animateScroll } from 'react-scroll';
 import Loader from 'components/Loader/Loader';
-import { fetchMovieCast } from 'helpers/API/API';
-import { CastWrapper } from './Cast.styled';
-import CastList from './CastList/CastList';
+import { ReviewsWrapper } from './Reviews.styled';
+import ReviewsList from './ReviewsList/ReviewsList';
 
-const Cast = () => {
+const Reviews = () => {
   const { movieId } = useParams();
-  const [cast, setCast] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const abortController = new AbortController();
-    const getMovieCast = async () => {
+    const getMovieReviews = async () => {
       try {
         setLoading(true);
         setError(null);
-        const movieCast = await fetchMovieCast(movieId, {
+        const movieReviews = await fetchMovieReviews(movieId, {
           signal: abortController.signal,
         });
-        setCast(movieCast);
+        setReviews(movieReviews);
       } catch (error) {
         setError(error.message);
       } finally {
         setLoading(false);
       }
     };
-
-    getMovieCast();
+    getMovieReviews();
 
     return () => {
       abortController.abort();
     };
   }, [movieId]);
 
-  if (cast) {
-    animateScroll.scrollMore(640);
+  if (reviews) {
+    animateScroll.scrollMore(400);
   }
 
   return (
     <>
       {loading && <Loader />}
-      {error && <p>Error loading information. Please try again later.</p>}
-      {cast && (
-        <CastWrapper>
-          <CastList cast={cast} />
-        </CastWrapper>
+      {error && <p>Error loading movie reviews. Please try again later.</p>}
+      {reviews && (
+        <ReviewsWrapper>
+          <ReviewsList reviews={reviews} />
+        </ReviewsWrapper>
       )}
     </>
   );
 };
 
-export default Cast;
+export default Reviews;

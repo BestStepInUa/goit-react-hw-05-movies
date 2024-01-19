@@ -34,7 +34,7 @@ const Home = () => {
     <>
       <h1>Weekly trending movies:</h1>
       {loading && <Loader />}
-      {error && <p>Error loading movie. Please try again later.</p>}
+      {error && <p>Error loading movies. Please try again later.</p>}
       {!loading && movies?.length > 0 && <TrendingMoviesList movies={movies} />}
     </>
   );
