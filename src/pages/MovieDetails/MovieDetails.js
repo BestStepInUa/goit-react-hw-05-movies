@@ -35,43 +35,51 @@ const MoviesDetails = () => {
     };
   }, [movieId]);
 
-  const IMAGE_URL = 'https://image.tmdb.org/t/p/w500/';
+  const IMAGE_URL = 'https://image.tmdb.org/t/p/w300/';
   const { poster_path, title, release_date, vote_average, overview, genres } =
     movie || {};
   const movieImgSrc = poster_path ? IMAGE_URL + poster_path : defaultImg;
-  const userScore = Math.round((Number(vote_average) * 100) / 10);
+  const userScore = vote_average
+    ? Math.round((Number(vote_average) * 100) / 10)
+    : 'no data available';
 
   return (
     <>
       {loading && <Loader />}
       {error && <p>Error loading movie. Please try again later.</p>}
-      <MovieDetailsWrapper>
-        <Card>
-          <Thumb>
-            <img src={`${movieImgSrc}`} alt={title} />
-          </Thumb>
-          <Info>
-            <h2>
-              {title} ({release_date.slice(0, 4)})
-            </h2>
-            <ul>
-              <li>
-                <p>
-                  User Score: <span>{userScore}%</span>
-                </p>
-              </li>
-              <li>
-                <h3>Overview</h3>
-                <p>{overview}</p>
-              </li>
-              <li>
-                <h3>Genres</h3>
-                <p>{genres.map(genre => genre.name).join(' ')}</p>
-              </li>
-            </ul>
-          </Info>
-        </Card>
-      </MovieDetailsWrapper>
+      {movie && (
+        <MovieDetailsWrapper>
+          <Card>
+            <Thumb>
+              <img src={`${movieImgSrc}`} alt={title} />
+            </Thumb>
+            <Info>
+              <h2>
+                {title} ({release_date && release_date.slice(0, 4)})
+              </h2>
+              <ul>
+                <li>
+                  <p>
+                    User Score: <span>{userScore}%</span>
+                  </p>
+                </li>
+                <li>
+                  <h3>Overview</h3>
+                  <p>{overview ? overview : 'no data available'}</p>
+                </li>
+                <li>
+                  <h3>Genres</h3>
+                  <p>
+                    {genres
+                      ? genres.map(genre => genre.name).join(' ')
+                      : 'no data available'}
+                  </p>
+                </li>
+              </ul>
+            </Info>
+          </Card>
+        </MovieDetailsWrapper>
+      )}
     </>
   );
 };

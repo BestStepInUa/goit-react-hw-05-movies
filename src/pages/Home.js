@@ -1,6 +1,6 @@
 import Loader from 'components/Loader/Loader';
 import TrendingMoviesList from 'components/TrendingMoviesList/TrendingMoviesList';
-import { fetchTrending } from 'helpers/API/API';
+import { fetchTrendingMovies } from 'helpers/API/API';
 import { useEffect, useState } from 'react';
 
 const Home = () => {
@@ -10,11 +10,11 @@ const Home = () => {
 
   useEffect(() => {
     const abortController = new AbortController();
-    async function getTrending() {
+    const getTrendingMovies = async () => {
       try {
         setLoading(true);
         setError(null);
-        const fetchedTrendingMovies = await fetchTrending({
+        const fetchedTrendingMovies = await fetchTrendingMovies({
           signal: abortController.signal,
         });
         setMovies(fetchedTrendingMovies);
@@ -23,16 +23,16 @@ const Home = () => {
       } finally {
         setLoading(false);
       }
-    }
+    };
 
-    getTrending();
+    getTrendingMovies();
 
     return () => abortController.abort();
   }, []);
 
   return (
     <>
-      <h1>Trending today</h1>
+      <h1>Weekly trending movies:</h1>
       {loading && <Loader />}
       {error && <p>Error loading movie. Please try again later.</p>}
       {!loading && movies?.length > 0 && <TrendingMoviesList movies={movies} />}

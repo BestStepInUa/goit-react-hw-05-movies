@@ -12,7 +12,7 @@ export const Card = styled.div`
 `;
 
 export const Thumb = styled.div`
-  width: 270px;
+  min-width: 300px;
   overflow: hidden;
 `;
 
