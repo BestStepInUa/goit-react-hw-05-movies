@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { MdArrowBackIos } from 'react-icons/md';
 import Loader from 'components/Loader/Loader';
@@ -99,9 +99,9 @@ const MoviesDetails = () => {
             <Link to="cast">Cast</Link>
             <Link to="reviews">Reviews</Link>
           </AdditionalInfoWrapper>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Outlet />
-          </Suspense>
+          {/* <Suspense fallback={<div>Loading...</div>}> */}
+          <Outlet />
+          {/* </Suspense> */}
         </>
       )}
     </>
