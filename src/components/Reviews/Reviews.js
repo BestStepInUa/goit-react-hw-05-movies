@@ -1,10 +1,10 @@
-import { fetchMovieReviews } from 'helpers/API/API';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { animateScroll } from 'react-scroll';
 import Loader from 'components/Loader/Loader';
 import { ReviewsWrapper } from './Reviews.styled';
 import ReviewsList from './ReviewsList/ReviewsList';
+import { fetchMovieReviews } from 'helpers/API/API';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -47,6 +47,9 @@ const Reviews = () => {
         <ReviewsWrapper>
           <ReviewsList reviews={reviews} />
         </ReviewsWrapper>
+      )}
+      {!loading && reviews?.length === 0 && (
+        <div>We dont have any reviews for this movie.</div>
       )}
     </>
   );

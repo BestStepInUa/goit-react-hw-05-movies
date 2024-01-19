@@ -1,14 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Suspense, useEffect, useRef, useState } from 'react';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+import { MdArrowBackIos } from 'react-icons/md';
+import Loader from 'components/Loader/Loader';
 import { fetchMovieDetails } from 'helpers/API/API';
 import {
   AdditionalInfoWrapper,
   Card,
+  GoBackBtn,
   Info,
   MovieDetailsWrapper,
   Thumb,
 } from './MovieDetails.styled';
-import Loader from 'components/Loader/Loader';
 import defaultImg from '../../images/defaultImg.png';
 
 const MoviesDetails = () => {
@@ -16,6 +18,8 @@ const MoviesDetails = () => {
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const location = useLocation();
+  const goBackBtnLocationRef = useRef(location?.state?.from ?? '/');
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -55,6 +59,10 @@ const MoviesDetails = () => {
       {error && <p>Error loading movie. Please try again later.</p>}
       {movie && (
         <>
+          <GoBackBtn to={goBackBtnLocationRef.current}>
+            <MdArrowBackIos />
+            Go back
+          </GoBackBtn>
           <MovieDetailsWrapper>
             <Card>
               <Thumb>
@@ -91,7 +99,9 @@ const MoviesDetails = () => {
             <Link to="cast">Cast</Link>
             <Link to="reviews">Reviews</Link>
           </AdditionalInfoWrapper>
-          <Outlet />
+          <Suspense fallback={<div>Loading...</div>}>
+            <Outlet />
+          </Suspense>
         </>
       )}
     </>

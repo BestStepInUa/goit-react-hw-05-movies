@@ -1,7 +1,7 @@
-import Loader from 'components/Loader/Loader';
-import TrendingMoviesList from 'components/TrendingMoviesList/TrendingMoviesList';
-import { fetchTrendingMovies } from 'helpers/API/API';
 import { useEffect, useState } from 'react';
+import Loader from 'components/Loader/Loader';
+import MoviesList from 'components/MoviesList/MoviesList';
+import { fetchTrendingMovies } from 'helpers/API/API';
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -35,7 +35,7 @@ const Home = () => {
       <h1>Weekly trending movies:</h1>
       {loading && <Loader />}
       {error && <p>Error loading movies. Please try again later.</p>}
-      {!loading && movies?.length > 0 && <TrendingMoviesList movies={movies} />}
+      {!loading && movies?.length > 0 && <MoviesList movies={movies} />}
     </>
   );
 };
