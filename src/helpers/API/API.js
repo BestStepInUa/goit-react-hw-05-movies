@@ -10,7 +10,6 @@ const params = {
 
 export const fetchTrendingMovies = async () => {
   const { data } = await axios.get('trending/movie/week', { params });
-  console.log('Weekly trending movies:', data.results);
   return data.results;
 };
 
