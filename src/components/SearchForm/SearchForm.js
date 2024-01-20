@@ -1,5 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import {
+  SearchFormStyled,
   SearchFormBtn,
   SearchFormBtnIcon,
   SearchFormInput,
@@ -15,12 +16,12 @@ const SearchForm = () => {
   };
 
   return (
-    <SearchForm onSubmit={handleFormSubmit}>
+    <SearchFormStyled onSubmit={handleFormSubmit}>
       <SearchFormInput type="text" name="query" autoFocus autoComplete="off" />
       <SearchFormBtn type="submit">
         <SearchFormBtnIcon />
       </SearchFormBtn>
-    </SearchForm>
+    </SearchFormStyled>
   );
 };
 
