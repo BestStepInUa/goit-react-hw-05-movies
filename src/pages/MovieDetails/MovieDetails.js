@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { MdArrowBackIos } from 'react-icons/md';
+import MovieCard from 'components/MovieCard/MovieCard';
 import Loader from 'components/Loader/Loader';
 import { fetchMovieDetails } from 'helpers/API/API';
 import {
@@ -8,7 +9,6 @@ import {
   GoBackBtn,
   MovieDetailsWrapper,
 } from './MovieDetails.styled';
-import MovieCard from './MovieCard/MovieCard';
 
 const MoviesDetails = () => {
   const { movieId } = useParams();

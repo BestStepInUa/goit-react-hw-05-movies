@@ -1,5 +1,5 @@
 import { Card, Info, Thumb } from './MovieCard.styled';
-import defaultImg from '../../../images/defaultImg.png';
+import defaultImg from '../../images/defaultImg.png';
 
 const MovieCard = ({ movie }) => {
   const { poster_path, title, release_date, vote_average, overview, genres } =
