@@ -1,14 +1,9 @@
 import { Card, Info, Thumb } from './MovieCard.styled';
 import defaultImg from '../../../images/defaultImg.png';
 
-const MovieCard = ({
-  poster_path,
-  title,
-  release_date,
-  vote_average,
-  overview,
-  genres,
-}) => {
+const MovieCard = ({ movie }) => {
+  const { poster_path, title, release_date, vote_average, overview, genres } =
+    movie;
   const IMAGE_URL = 'https://image.tmdb.org/t/p/w300/';
   const movieImgSrc = poster_path ? IMAGE_URL + poster_path : defaultImg;
   const userScore = vote_average
