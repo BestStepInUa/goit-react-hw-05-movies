@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { animateScroll } from 'react-scroll';
+
 import Loader from 'components/Loader/Loader';
-import { CastWrapper } from './Cast.styled';
 import CastList from './CastList/CastList';
+
 import { fetchMovieCast } from 'helpers/API/API';
+
+import { CastWrapper } from './Cast.styled';
 
 const Cast = () => {
   const { movieId } = useParams();

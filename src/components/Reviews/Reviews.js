@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { animateScroll } from 'react-scroll';
+
 import Loader from 'components/Loader/Loader';
-import { ReviewsWrapper } from './Reviews.styled';
 import ReviewsList from './ReviewsList/ReviewsList';
+
 import { fetchMovieReviews } from 'helpers/API/API';
+
+import { ReviewsWrapper } from './Reviews.styled';
 
 const Reviews = () => {
   const { movieId } = useParams();

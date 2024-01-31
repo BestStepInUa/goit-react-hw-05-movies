@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
 import Loader from 'components/Loader/Loader';
 import SearchForm from 'components/SearchForm/SearchForm';
 import MoviesList from 'components/MoviesList/MoviesList';
-import { useSearchParams } from 'react-router-dom';
+
 import { fetchSearchMovie } from 'helpers/API/API';
 
 const Movies = () => {

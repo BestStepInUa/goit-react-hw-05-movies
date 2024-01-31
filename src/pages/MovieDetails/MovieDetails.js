@@ -1,16 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { MdArrowBackIos } from 'react-icons/md';
+
 import MovieCard from 'components/MovieCard/MovieCard';
 import Loader from 'components/Loader/Loader';
+
 import { fetchMovieDetails } from 'helpers/API/API';
+
 import {
   AdditionalInfoWrapper,
   GoBackBtn,
   MovieDetailsWrapper,
 } from './MovieDetails.styled';
 
-const MoviesDetails = () => {
+const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -60,13 +63,13 @@ const MoviesDetails = () => {
             <Link to="cast">Cast</Link>
             <Link to="reviews">Reviews</Link>
           </AdditionalInfoWrapper>
-          {/* <Suspense fallback={<div>Loading...</div>}> */}
-          <Outlet />
-          {/* </Suspense> */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <Outlet />
+          </Suspense>
         </>
       )}
     </>
   );
 };
 
-export default MoviesDetails;
+export default MovieDetails;
